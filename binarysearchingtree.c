@@ -61,44 +61,31 @@ else if (r->info > v)
 			free (t);
 		}
 		else {
-			t_tree *pai = r;
-			t_tree *f = r->left;
-			while (f->right != NULL) {
-				pai = f;
-				f = f->right;
+			t_tree *parent = r;
+			t_tree *son = r->left;
+			while (son->right != NULL) {
+				parent = son;
+				son = son->right;
 			}
-			r->info = f->info;
-			f->info = v;
+			r->info = son->info;
+			son->info = v;
 			r->left = retira(r->left, v);
 		}
 	}
 return r;
 }
 
-void *maiormenor (t_tree *tree, t_tree **maior, t_tree **menor){
-
-	if(tree!=NULL){
-	maiormenor(tree->left, &maior, &menor);
-	if(tree->info<(*menor)->info) *menor=tree;
-	maiormenor(tree->right, &maior, &menor);
-	if(tree->info>(*maior)->info) *maior=tree;
-	}
-}
-
 int main(){
 
-    t_tree *tree, *maior, *menor;
+    t_tree *tree;
 
     tree=init();
     insert(&tree, newleaf(50));
     insert(&tree, newleaf(60));
     insert(&tree, newleaf(40));
     insert(&tree, newleaf(70));
-	maior=menor=tree;
     print(tree);
     retira(tree, 40);
     puts("");
     print(tree);
-	maiormenor(tree, &maior, &menor);
-	printf("Maior: %d   |   Menor: %d", maior->info, menor->info);
 }
