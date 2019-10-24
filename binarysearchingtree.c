@@ -33,7 +33,7 @@ void print(t_tree *tree){
 
     if(tree!=NULL){
 	print(tree->left);
-    printf("%d ", tree->info);
+	printf("%d ", tree->info);
 	print(tree->right);
     }
 }
@@ -61,10 +61,8 @@ else if (r->info > v)
 			free (t);
 		}
 		else {
-			t_tree *parent = r;
 			t_tree *son = r->left;
 			while (son->right != NULL) {
-				parent = son;
 				son = son->right;
 			}
 			r->info = son->info;
@@ -75,17 +73,29 @@ else if (r->info > v)
 return r;
 }
 
+
 int main(){
 
-    t_tree *tree;
+    t_tree *tree=init();
 
-    tree=init();
     insert(&tree, newleaf(50));
     insert(&tree, newleaf(60));
     insert(&tree, newleaf(40));
-    insert(&tree, newleaf(70));
-    print(tree);
-    retira(tree, 40);
-    puts("");
-    print(tree);
+    insert(&tree, newleaf(10));
+	insert(&tree, newleaf(100));
+    insert(&tree, newleaf(35));
+    insert(&tree, newleaf(25));
+    insert(&tree, newleaf(20));
+    insert(&tree, newleaf(12));
+    printf("Tree values: "); print(tree);
+    tree=retira(tree, 50);
+	tree=retira(tree, 60);
+	tree=retira(tree, 40);
+    tree=retira(tree, 10);
+	tree=retira(tree, 100);
+	tree=retira(tree, 35);
+	puts("");
+    printf("Tree after removing values: "); print(tree);
+	puts("");
+
 }
