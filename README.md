@@ -2,4 +2,4 @@
 progamming classes activity
 
 
-this is just a binary searching tree training
+binary searching tree in C
